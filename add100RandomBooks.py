@@ -34,6 +34,33 @@ def addBook(book, apiKey):
     else:
         raise Exception(f"Error code {r.status_code} and text {r.text}, while trying to add book {book}.")
 
+def deleteFirstFiveBooks(apiKey):
+    for i in range(1, 6):
+        r = requests.delete(
+            f"{APIHOST}/api/v1/books/{i}",
+            headers = {
+                "X-API-Key": apiKey
+            }
+        )
+        if r.status_code == 200:
+            print(f"Book {i} deleted.")
+        else:
+            raise Exception(f"Error code {r.status_code} and text {r.text}, while trying to delete book {i}.")
+
+def deleteLastFiveBooks(apiKey):
+    for i in range(25, 30):
+        r = requests.delete(
+            f"{APIHOST}/api/v1/books/{i}",
+            headers = {
+                "X-API-Key": apiKey
+            }
+        )
+        if r.status_code == 200:
+            print(f"Book {i} deleted.")
+        else:
+            raise Exception(f"Error code {r.status_code} and text {r.text}, while trying to delete book {i}.")
+
+
 # Get the Auth Token Key
 apiKey = getAuthToken()
 
